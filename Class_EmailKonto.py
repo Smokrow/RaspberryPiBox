@@ -24,7 +24,6 @@ class EmailKontoBox(object):
 		self.POP3=POP3
 		self.error_log("Hallo")
 
-	
     def Email_string_abrufen (self):
         try:
             #Login und checken der neuen Mails
@@ -58,15 +57,15 @@ class EmailKontoBox(object):
                 for part in mail.walk():
                     if part.get_content_type() == 'text/plain':
                         raw_message=part.get_payload(decode=True) # prints the raw text
-                print("raw")
-                print(raw_message)
+                #print("raw")
+                #print(raw_message)
                 #bearbeitete den String nach
                 message_str=raw_message#.decode("utf8")
-                print("message_str")
-                print(message_str)
+                #print("message_str")
+                #print(message_str)
                 message_list=message_str.split("\n")
-                print("message_list")
-                print(message_list)
+                #print("message_list")
+                #print(message_list)
                 message_final=""
                 for x in message_list:
                     if(x!=""):
@@ -102,7 +101,7 @@ class EmailKontoBox(object):
         Data=open("Messages.txt","a")
         Message.strip("\n")
         x="%%%"+Message+"&&&"+Sender+"$$$"+str(Zeit)+"///"
-        print(x)
+        #print(x)
         Data.write(x) 
         Data.close()
         
@@ -111,7 +110,7 @@ class EmailKontoBox(object):
     def update_message_file(self):
         #guckt ob neue Nachrichten anliegen und schreibt diese in die File.
         Message,Addresse=self.Email_string_abrufen()
-        print(Message)
+        #print(Message)
         t=time.time()
         if((Message!=None)):
             if (Message!=""):
