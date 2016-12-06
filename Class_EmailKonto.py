@@ -91,10 +91,13 @@ class EmailKontoBox(object):
             else:
                 pop.quit()
                 return [None,None]
-            
-            
         except poplib.error_proto as detail:
             print("POP3 Protocol Error", detail)
+        except socket.error as error:
+            print(error)
+
+
+
 
     def save_to_file(self,Message,Sender,Zeit):
         #speichert die Nachricht in der Message.txt ab
@@ -158,7 +161,7 @@ class EmailKontoBox(object):
         self.load_messages()
         for x in self.Emails:
             print(x)
-            if((time.time()-float(x[2]))>3600.0):
+            if((time.time()-float(x[2]))>216000.0):
                 self.Emails.remove(x)
         Data=open("Messages.txt","w")
         Data.close()

@@ -4,6 +4,7 @@ import Image
 import ImageFont
 import ImageDraw
 import random
+import poplib
 from rgbmatrix import Adafruit_RGBmatrix
 
 def draw_Message(message,Color1,Color2):
@@ -17,10 +18,12 @@ def draw_Message(message,Color1,Color2):
         time.sleep(0.05)
         
 #festlegen der Gesamten Grund
-Konto=Class_EmailKonto.EmailKontoBox('pythontest1@outlook.de','simpsons1','pop-mail.outlook.com')
+
+Konto = Class_EmailKonto.EmailKontoBox('pythontest1@outlook.de', 'simpsons1', 'pop-mail.outlook.com')
 Konto.load_colors()
 Konto.load_messages()
 Konto.error_log("Hi")
+
 
     
 matrix = Adafruit_RGBmatrix(16, 1)
@@ -44,27 +47,29 @@ Konto.delete_old_messages()
 Konto.load_messages()
 
 
-while(True):
-    if(time.time()-t>60.0):
-        Konto.update_message_file()
-        Konto.delete_old_messages()
-        Konto.load_messages()
-    Emails=Konto.get_messages()
-    spec_color=Konto.get_colors()
-    final_Message=[]
-    if(Emails==[]):
-        draw_Message("Keine Nachrichten",(255,0,0),(0,0,0))
-    else:
-        
-        for x in Emails:
-            Message=x[0]
-            Color=Colors[random.randint(0,len(Colors)-1)]
-            Addresse=x[1]
-        
-            for y in spec_color:
-                if(y[0]==Addresse):
-                    Color=(y[1],y[2],y[3])
-            draw_Message(Message.decode("utf-8"),Color,(0,0,0))
+while True :
+
+        if time.time()-t>120.0:
+            Konto.update_message_file()
+            Konto.delete_old_messages()
+            Konto.load_messages()
+        Emails=Konto.get_messages()
+        spec_color=Konto.get_colors()
+        final_Message=[]
+        if(Emails==[]):
+            draw_Message("Keine Nachrichten",(255,0,0),(0,0,0))
+        else:
+            for x in Emails:
+                Message=x[0]
+                Color=Colors[random.randint(0,len(Colors)-1)]
+                Addresse=x[1]
+
+                for y in spec_color:
+                    if(y[0]==Addresse):
+                        Color=(y[1],y[2],y[3])
+                draw_Message(Message.decode("utf-8"),Color,(0,0,0))
+
+
         
                 
         
@@ -72,13 +77,5 @@ while(True):
     
     
 
-
-#Konto.print_messages()
-#Konto.update_message_file()
-
-#Konto.print_messages()
-#Konto.delete_old_messages()
-#Konto.load_messages()
-#Konto.print_messages()
 
 
