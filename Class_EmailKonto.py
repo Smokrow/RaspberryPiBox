@@ -23,6 +23,7 @@ class EmailKontoBox(object):
 		self.PW=PW
 		self.POP3=POP3
 		self.error_log("Hallo")
+
 	
     def Email_string_abrufen (self):
         try:
