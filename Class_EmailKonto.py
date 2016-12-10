@@ -93,8 +93,7 @@ class EmailKontoBox(object):
                 return [None,None]
         except poplib.error_proto as detail:
             print("POP3 Protocol Error", detail)
-        except socket.error as error:
-            print(error)
+
 
 
 
