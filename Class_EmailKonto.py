@@ -14,16 +14,16 @@ class EmailKontoBox(object):
    
     
     def error_log(self,message):
-		Data=open("errorlog.txt","a")
-		t=time.strftime("%a, %d %b %Y %H:%M:%S ", time.gmtime())
-		out=str(t)+"Error:"+message+"\n"
-		Data.write(out)
-		Data.close()
+        Data=open("errorlog.txt","a")
+        t=time.strftime("%a, %d %b %Y %H:%M:%S ", time.gmtime())
+        out=str(t)+"Error:"+message+"\n"
+        Data.write(out)
+        Data.close()
     def __init__(self,Account,PW,POP3):
-		self.Account=Account
-		self.PW=PW
-		self.POP3=POP3
-		self.error_log("Hallo")
+        self.Account=Account
+        self.PW=PW
+        self.POP3=POP3
+        self.error_log("Hallo")
 
     def Email_string_abrufen (self):
         try:
