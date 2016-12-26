@@ -5,6 +5,7 @@ import ImageFont
 import ImageDraw
 import random
 import socket
+import poplib
 
 
 from rgbmatrix import Adafruit_RGBmatrix
@@ -76,6 +77,8 @@ while True :
             time.sleep(10)
             print("Socket error")
             Konto.error_log("Socket error")
+        except poplib.error_proto as error1:
+            draw_Message("Probleme mit der E-Mail Verbindung. Bitte die Emailadresse checken",(255,0,0),(0,0,0))
 
 
         
