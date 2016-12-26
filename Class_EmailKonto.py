@@ -3,6 +3,7 @@ import email
 import os.path
 import smtplib
 import time 
+import socket
 
 class EmailKontoBox(object):
     Account=""

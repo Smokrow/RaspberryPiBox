@@ -4,7 +4,9 @@ import Image
 import ImageFont
 import ImageDraw
 import random
-import poplib
+import socket
+
+
 from rgbmatrix import Adafruit_RGBmatrix
 
 def draw_Message(message,Color1,Color2):
@@ -49,25 +51,31 @@ Konto.load_messages()
 
 while True :
 
-        if time.time()-t>120.0:
-            Konto.update_message_file()
-            Konto.delete_old_messages()
-            Konto.load_messages()
-        Emails=Konto.get_messages()
-        spec_color=Konto.get_colors()
-        final_Message=[]
-        if(Emails==[]):
-            draw_Message("Keine Nachrichten",(255,0,0),(0,0,0))
-        else:
-            for x in Emails:
-                Message=x[0]
-                Color=Colors[random.randint(0,len(Colors)-1)]
-                Addresse=x[1]
+        try:
 
-                for y in spec_color:
-                    if(y[0]==Addresse):
-                        Color=(y[1],y[2],y[3])
-                draw_Message(Message.decode("utf-8"),Color,(0,0,0))
+            if time.time()-t>120.0:
+                Konto.update_message_file()
+                Konto.delete_old_messages()
+                Konto.load_messages()
+            Emails=Konto.get_messages()
+            spec_color=Konto.get_colors()
+            final_Message=[]
+            if(Emails==[]):
+                draw_Message("Keine Nachrichten",(255,0,0),(0,0,0))
+            else:
+                for x in Emails:
+                    Message=x[0]
+                    Color=Colors[random.randint(0,len(Colors)-1)]
+                    Addresse=x[1]
+
+                    for y in spec_color:
+                        if(y[0]==Addresse):
+                            Color=(y[1],y[2],y[3])
+                    draw_Message(Message.decode("utf-8"),Color,(0,0,0))
+        except socket.error as error1:
+            time.sleep(10)
+            print("Socket error")
+            Konto.error_log("Socket error")
 
 
         

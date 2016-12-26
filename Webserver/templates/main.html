@@ -32,13 +32,13 @@
   <body>
     
 	<div class="btn-group" role="group" aria-label="..." 
-		<form action="/Reboot">
-		<button type="button" href="/Reboot" class="btn btn-default">Reboot</button>
+		<form method="get" action="/Reboot">
+    		<button type="submit" href="{{ url_for('templates',filename='Webseite.html' }}">Continue</button>
 		</form>
-		<form action="/Shutdown" method="post">
-		<button type="button" href="/Shutdown" class="btn btn-default">Shutdown</button>
+		<form action="/Shutdown" method="get">
+		<button type="button" href="/Shutdown" value="Shutdown" />Shutdown </button>
 		</form>
-		<form action="/Delete_Messages" method="post">
+		<form method="get" action="/Delete_Messages" method="post">
 		<button type="button" class="btn btn-default">Delete All</button>
 		</form>
 		
