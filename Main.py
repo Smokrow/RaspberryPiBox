@@ -77,7 +77,7 @@ while True :
             time.sleep(10)
             print("Socket error")
             Konto.error_log("Socket error")
-        except poplib.error_proto as error1:
+        except TypeError as error1:
             draw_Message("Probleme mit der E-Mail Verbindung. Bitte die Emailadresse checken",(255,0,0),(0,0,0))
             print("Little Problem here")
 
